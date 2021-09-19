@@ -1,6 +1,6 @@
 require("dotenv/config")
 
-const { Client, Intents } = require("discord.js")
+const { Client, Intents, MessageEmbed } = require("discord.js")
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
@@ -86,6 +86,35 @@ client.on("messageCreate", async (message) => {
 			message.reply("Your queue is now clear :)")
 		} catch (error) {
 			message.reply("Queue is already clear :)")
+		}
+	}
+
+	if (command === "commands") {
+		const embededReply = new MessageEmbed()
+			.setTitle("TheDJ Commands")
+			.setDescription(
+				"A few commands that I keep an eye out for. Just find a song, get the YT link, and then enjoy :)",
+			)
+			.addFields(
+				{ name: "Play a new song", value: "`&play <YT URL here>`" },
+				{
+					name: "Stop current song",
+					value: "`&stop` - This will permanently stop the song and you will need to use the play command again.",
+				},
+				{ name: "Pause a song", value: "`&pause`" },
+				{ name: "Resume a song", value: "`&resume`" },
+				{ name: "Check Now Playing", value: "`&nowPlaying`" },
+				{ name: "Check song volume", value: "`&getVolume`" },
+				{
+					name: "Change / set song volume",
+					value: "`&setVolume <new volume, like 10 or 100>`",
+				},
+			)
+			.setTimestamp()
+		try {
+			message.reply({ embeds: [embededReply] })
+		} catch (error) {
+			console.log(error)
 		}
 	}
 
