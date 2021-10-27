@@ -53,7 +53,7 @@ client.on("messageCreate", async (message) => {
 	if (command === "stop") {
 		try {
 			guildQueue.stop()
-			message.reply(`You gotta use the play command and give me the YT link again.`)
+			message.reply(`Hope you enjoyed 🙂`)
 		} catch (error) {
 			message.reply("Nothing to stop")
 		}
@@ -71,13 +71,13 @@ client.on("messageCreate", async (message) => {
 	if (command === "pause") {
 		guildQueue.setPaused(true)
 		message.reply(
-			`Your song ${song.name} is now paused. Use the resume command to resume playback :)`,
+			`Your song ${guildQueue.nowPlaying} is now paused. Use the resume command to resume playback :)`,
 		)
 	}
 
 	if (command === "resume") {
 		guildQueue.setPaused(false)
-		message.reply(`Your song ${song.name} is back! Enjoy :)`)
+		message.reply(`Your song ${guildQueue.nowPlaying} is back! Enjoy :)`)
 	}
 
 	if (command === "clearQueue") {
