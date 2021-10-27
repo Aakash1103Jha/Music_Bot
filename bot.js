@@ -26,12 +26,25 @@ client.on("messageCreate", async (message) => {
 	let guildQueue = client.player.getQueue(message.guild.id)
 
 	if (command === "play") {
-		let queue = client.player.createQueue(message.guild.id)
-		await queue.join(message.member.voice.channel)
-		let song = await queue.play(args.join(" ")).catch((_) => {
-			if (!guildQueue) queue.stop()
-		})
-		message.reply(`Now playing ${song.name}`)
+		try {
+			let queue = client.player.createQueue(message.guild.id)
+			await queue.join(message.member.voice.channel)
+
+			let song = await queue.play(args.join(" ")).catch((_) => {
+				if (!guildQueue) {
+					message.reply(
+						"You are currently not in any voice channel. Join one to play music.",
+					)
+					return queue.stop()
+				}
+			})
+			return message.reply(`Now playing ${song.name}`)
+		} catch (error) {
+			console.error(error.message)
+			return message.reply(
+				"You are currently not in any voice channel. Join one to play music.",
+			)
+		}
 	}
 
 	if (command === "playlist") {
