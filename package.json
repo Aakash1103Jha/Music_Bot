@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "bot.js",
 	"scripts": {
-		"bot": "node bot.js --traceWarnings"
+		"start": "node bot.js --traceWarnings"
 	},
 	"keywords": [],
 	"author": "",
@@ -18,5 +18,8 @@
 		"ffmpeg": "0.0.4",
 		"fluent-ffmpeg": "2.1.2",
 		"ytdl-core": "4.9.1"
+	},
+	"engines": {
+		"node": "16.x"
 	}
 }

@@ -35,7 +35,7 @@ client.on("messageCreate", async (message) => {
 					message.reply(
 						"You are currently not in any voice channel. Join one to play music.",
 					)
-					return queue.stop()
+					queue.stop()
 				}
 			})
 			return message.reply(`Now playing ${song.name}`)
